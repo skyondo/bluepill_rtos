@@ -21,6 +21,7 @@ bluepill_rtos\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.
 bluepill_rtos\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h
 bluepill_rtos\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h
 bluepill_rtos\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h
+bluepill_rtos\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h
 bluepill_rtos\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h
 bluepill_rtos\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 bluepill_rtos\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
@@ -41,4 +42,7 @@ bluepill_rtos\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.
 bluepill_rtos\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 bluepill_rtos\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 bluepill_rtos\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+bluepill_rtos\main.o: ../Inc/can.h
 bluepill_rtos\main.o: ../Inc/gpio.h
+bluepill_rtos\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+bluepill_rtos\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

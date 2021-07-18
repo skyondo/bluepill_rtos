@@ -463,11 +463,12 @@ ARM Macro Assembler    Page 8
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=bluepill_rtos\startup_stm32f103xb.d -obluepill_rtos\startup_stm32f
-103xb.o -I..\Inc -I.\RTE\_bluepill_rtos -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.7.0\C
-MSIS\Core\Include -IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include
- --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 525" --pre
-define="_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" --list=startup_stm32f10
-3xb.lst startup_stm32f103xb.s
+103xb.o -I..\Inc -I.\RTE\_bluepill_rtos -IC:\Users\Apple\AppData\Local\Arm\Pack
+s\ARM\CMSIS\5.7.0\CMSIS\Core\Include -IC:\Users\Apple\AppData\Local\Arm\Packs\K
+eil\STM32F1xx_DFP\2.3.0\Device\Include --predefine="__MICROLIB SETA 1" --predef
+ine="__UVISION_VERSION SETA 534" --predefine="_RTE_ SETA 1" --predefine="STM32F
+10X_MD SETA 1" --predefine="_RTE_ SETA 1" --list=startup_stm32f103xb.lst startu
+p_stm32f103xb.s
 
 
 

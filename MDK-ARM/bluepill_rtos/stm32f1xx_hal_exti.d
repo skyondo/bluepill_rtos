@@ -20,6 +20,7 @@ bluepill_rtos\stm32f1xx_hal_exti.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1x
 bluepill_rtos\stm32f1xx_hal_exti.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h
 bluepill_rtos\stm32f1xx_hal_exti.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h
 bluepill_rtos\stm32f1xx_hal_exti.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h
+bluepill_rtos\stm32f1xx_hal_exti.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h
 bluepill_rtos\stm32f1xx_hal_exti.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h
 bluepill_rtos\stm32f1xx_hal_exti.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 bluepill_rtos\stm32f1xx_hal_exti.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h

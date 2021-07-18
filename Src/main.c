@@ -20,8 +20,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "can.h"
 #include "gpio.h"
-
+#include "time.h" //사용자 지정
+#include <stdio.h> //지정하고 있는 라이브러리 경로
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -44,6 +46,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+volatile uint8_t can1_rx0_flag =0; //컴파일러에게 최적화 x
 
 /* USER CODE END PV */
 
@@ -56,7 +59,8 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+uint8_t tt=0;
+char str[10];
 /* USER CODE END 0 */
 
 /**
@@ -87,8 +91,24 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_CAN_Init();
   /* USER CODE BEGIN 2 */
 
+	/*receive code 102,106,10A,10E 수신 */
+	canFilter1.FilterMaskIdHigh = 0x7F3 <<5; //레지스터 id부분 상위11비트에 할당
+	canFilter1.FilterIdHigh= 0x106 <<5; //5bit 쉬프트
+	canFilter1.FilterMaskIdLow = 0x7F3 <<5; //레지스터 id부분 상위11비트에 할당
+	canFilter1.FilterIdLow= 0x106 <<5; //5bit 쉬프트
+	
+	canFilter1.FilterMode = CAN_FILTERMODE_IDMASK;
+	canFilter1.FilterScale = CAN_FILTERSCALE_16BIT;
+	canFilter1.FilterFIFOAssignment = CAN_FilterFIFO0; //data저장
+	canFilter1.FilterBank = 0;
+	canFilter1.FilterActivation = ENABLE;
+	
+	HAL_CAN_ConfigFilter(&hcan1, &canFilter1);//can채널넘버, 필터설정값
+	HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);	//인터럽트 걸리게 설정
+	HAL_CAN_Start(&hcan1);
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
@@ -101,6 +121,25 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		if(can1_rx0_flag) //수신된 메세지가 있으면
+		{
+			sprintf(str, "RX ID: 0x%3X", canRxHeader.StdId);
+			sprintf(str, "RX ID: 0x%3X", can1RX0Data[0]);
+		}
+		if(tt==1)
+		{
+			tt=0;
+			canTXHeader.StdId = 0x102;
+			canTXHeader.RTR = CAN_RTR_DATA;
+			canTXHeader.IDE = CAN_ID_STD;
+			canTXHeader.DLC = 8;
+			
+			for(int i=0;i<8;i++) can1Tx0Data[i]++;
+			
+			TxMailBox = HAL_CAN_GetTxMailboxesFreeLevel(&hcan1);  //메일박스에 데이터 저장
+			HAL_CAN_AddTxMessage(&hcan1,&canTXHeader,&can1Tx0Data[0],&TxMailBox);		//데이터 전송, 마지막 메일박스 번호
+		}
+		
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -147,7 +186,15 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void  HAL_CAN_RxFIfo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+{
+	if(hcan ->Instance == CAN1)
+	{
+		HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &canRxHeader, &can1RX0Data[0]);
+		can1_rx0_flag =1; //인터럽트 걸리면 변수 1 set
+	}
+	
+}
 /* USER CODE END 4 */
 
  /**
